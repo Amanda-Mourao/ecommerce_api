@@ -22,7 +22,7 @@ export const getCategoryById = async (req, res) => {
   const {
     params: { id },
   } = req;
-  const category = await Category.findByPk(id, {include: Product});
+  const category = await Category.findByPk(id, { include: Product });
   if (!category) throw new Error("Category not found", { cause: 404 });
   res.json(category);
 };
