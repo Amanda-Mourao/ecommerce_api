@@ -1,7 +1,9 @@
 import Product from "../models/Product.js";
+import Category from "../models/Category.js";
+import Order from "../models/Order.js";
 
 export const getProducts = async (req, res) => {
-  const products = await Product.findAll();
+  const products = await Product.findAll({ include: Category });
   res.json(products);
 };
 
@@ -17,6 +19,8 @@ export const createProduct = async (req, res) => {
   if (found)
     throw new Error("Product with that name already exists", { cause: 409 });
   const product = await Product.create(req.body);
+  const category = await product.getCategory();
+  product.dataValues.category = category;
   res.json(product);
 };
 
@@ -24,7 +28,7 @@ export const getProductById = async (req, res) => {
   const {
     params: { id },
   } = req;
-  const product = await Product.findByPk(id);
+  const product = await Product.findByPk(id, { include: Category, Order });
   if (!product) throw new Error("Product not found", { cause: 404 });
   res.json(product);
 };
@@ -41,6 +45,8 @@ export const updateProduct = async (req, res) => {
   const product = await Product.findByPk(id);
   if (!product) throw new Error("Product not found", { cause: 404 });
   await product.update(req.body);
+  const category = await product.getCategory();
+  product.dataValues.category = category;
   res.json(product);
 };
 
