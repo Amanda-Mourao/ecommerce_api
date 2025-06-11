@@ -6,6 +6,8 @@ const User = sequelize.define("User", {
     type: DataTypes.INTEGER,
     allowNull: false,
     unique: true,
+    primaryKey: true,
+    autoIncrement: true,
   },
   name: {
     type: DataTypes.STRING,
@@ -19,7 +21,10 @@ const User = sequelize.define("User", {
   password: {
     type: DataTypes.STRING,
     allowNull: false,
-  },
+  }
+}, {
+  tableName: "users",
+  timestamps: false, 
 });
 
 export default User;
