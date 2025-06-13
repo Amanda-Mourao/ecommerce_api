@@ -6,6 +6,8 @@ const Order = sequelize.define("Order", {
     type: DataTypes.INTEGER,
     allowNull: false,
     unique: true,
+    primaryKey: true,
+    autoIncrement: true,
   },
   userId: {
     type: DataTypes.INTEGER,

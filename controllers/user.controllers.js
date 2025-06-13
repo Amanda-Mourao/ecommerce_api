@@ -1,4 +1,5 @@
 import User from "../models/User.js";
+import Order from "../models/Order.js";
 
 export const getUsers = async (req, res) => {
   const users = await User.findAll();
@@ -22,7 +23,7 @@ export const getUserById = async (req, res) => {
   const {
     params: { id },
   } = req;
-  const user = await User.findByPk(id);
+  const user = await User.findByPk(id, { include: Order });
   if (!user) throw new Error("User not found", { cause: 404 });
   res.json(user);
 };

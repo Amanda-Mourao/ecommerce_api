@@ -1,4 +1,5 @@
 import Category from "../models/Category.js";
+import Product from "../models/Product.js";
 
 export const getCategory = async (req, res) => {
   const category = await Category.findAll();
@@ -21,7 +22,7 @@ export const getCategoryById = async (req, res) => {
   const {
     params: { id },
   } = req;
-  const category = await Category.findByPk(id);
+  const category = await Category.findByPk(id, { include: Product });
   if (!category) throw new Error("Category not found", { cause: 404 });
   res.json(category);
 };
