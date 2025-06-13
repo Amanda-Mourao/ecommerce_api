@@ -17,8 +17,6 @@ export const createProduct = async (req, res) => {
   if (found)
     throw new Error("Product with that name already exists", { cause: 409 });
   const product = await Product.create(req.body);
-  const category = await product.getCategory();
-  product.dataValues.category = category;
   res.json(product);
 };
 
@@ -43,8 +41,6 @@ export const updateProduct = async (req, res) => {
   const product = await Product.findByPk(id);
   if (!product) throw new Error("Product not found", { cause: 404 });
   await product.update(req.body);
-  const category = await product.getCategory();
-  product.dataValues.category = category;
   res.json(product);
 };
 

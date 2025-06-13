@@ -52,6 +52,6 @@ Product.belongsToMany(Category, {
   through: "CategoryProducts",
 });
 
-sequelize.sync({ force: true });
+sequelize.sync();
 
 export {User, Product, Category, Order}

@@ -6,7 +6,7 @@ const productSchema = z.object({
     .min(1, "Name must be at least 1 character")
     .max(255, "Name must be at most 255 characters"),
   description: z.string().min(1, "Content must not be empty"),
-  price: z.int().positive(),
+  price: z.float32().positive(),
   categoryId: z.int().positive(),
 });
 

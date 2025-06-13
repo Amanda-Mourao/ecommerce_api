@@ -9,18 +9,13 @@ export const getOrder = async (req, res) => {
 
 export const createOrder = async (req, res) => {
   const {
-    body: { userId, productId, quantity, total },
+    body: { id, userId, productId, quantity, total },
   } = req;
   if (!userId || !productId || !quantity || !total)
     throw new Error("userId, productId, quantity, and total are required", {
       cause: 400,
     });
-  const found = await Order.findOne({ where: { id } });
-  if (found)
-    throw new Error("Order with that ID already exists", { cause: 409 });
   const order = await Order.create(req.body);
-  const user = await order.getUser();
-  order.dataValues.user = user;
   res.json(order);
 };
 
