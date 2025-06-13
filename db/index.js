@@ -1,9 +1,9 @@
-import { Sequelize } from 'sequelize';
+import { Sequelize } from "sequelize";
 
-const sequelize = new Sequelize(process.env.PG_URI, { logging: false });
+const sequelize = new Sequelize(process.env.PG_URI, { logging: true });
 
 if (sequelize) {
-    console.log("Läuft mit db");
+  console.log("Läuft mit db");
 }
 
 export default sequelize;

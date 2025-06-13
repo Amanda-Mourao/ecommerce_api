@@ -11,7 +11,7 @@ app.use(express.json());
 
 app.use("/users", userRouter);
 app.use("/products", productRouter);
-app.use("/order", orderRouter);
+app.use("/orders", orderRouter);
 app.use("/category", categoryRouter);
 
 app.listen(port, () => console.log(`Server is running on port ${port}`));

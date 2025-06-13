@@ -18,32 +18,38 @@ Order.belongsTo(User, {
   onDelete: "CASCADE",
 });
 
-Order.hasMany(Product, {
-  foreignKey: {
-    allowNull: false,
-    name: "orderId",
-  },
+const OrderProducts = sequelize.define("OrderProducts");
+
+Order.belongsToMany(Product, {
+  //   foreignKey: {
+  //     allowNull: false,
+  //     name: "orderId",
+  //   },
+  through: "OrderProducts",
 });
 
-Product.hasMany(Order, {
-  foreignKey: {
-    allowNull: false,
-    name: "orderId",
-  },
+Product.belongsToMany(Order, {
+  //   foreignKey: {
+  //     allowNull: false,
+  //     name: "orderId",
+  //   },
+  through: "OrderProducts",
 });
 
-Category.hasMany(Product, {
-  foreignKey: {
-    allowNull: false,
-    name: "categoryId",
-  },
+Category.belongsToMany(Product, {
+  //   foreignKey: {
+  //     allowNull: false,
+  //     name: "categoryId",
+  //   },
+  through: "CategoryProducts",
 });
-Product.belongsTo(Category, {
+Product.belongsToMany(Category, {
   foreignKey: {
     allowNull: false,
     name: "categoryId",
   },
   onDelete: "CASCADE",
+  through: "CategoryProducts",
 });
 
-sequelize.sync();
+sequelize.sync({ force: true });

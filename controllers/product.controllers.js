@@ -28,7 +28,7 @@ export const getProductById = async (req, res) => {
   const {
     params: { id },
   } = req;
-  const product = await Product.findByPk(id, { include: Category, Order });
+  const product = await Product.findByPk(id, { include: [Category, Order] });
   if (!product) throw new Error("Product not found", { cause: 404 });
   res.json(product);
 };
