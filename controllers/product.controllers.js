@@ -1,6 +1,4 @@
-import Product from "../models/Product.js";
-import Category from "../models/Category.js";
-import Order from "../models/Order.js";
+import { Product, Order, Category } from "../db/associations.js";
 
 export const getProducts = async (req, res) => {
   const products = await Product.findAll({ include: Category });

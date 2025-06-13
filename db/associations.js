@@ -53,3 +53,5 @@ Product.belongsToMany(Category, {
 });
 
 sequelize.sync({ force: true });
+
+export {User, Product, Category, Order}
